@@ -1,5 +1,4 @@
-require 'roles/depositable'
-require 'roles/withdrawable'
+require 'roles/transferrable'
 
 class Transfer
   def initialize(from_account, to_account, amount)
@@ -9,7 +8,7 @@ class Transfer
   end
 
   def execute
-    @from_account.extend(Withdrawable).withdraw(@amount)
-    @to_account.extend(Depositable).deposit(@amount)
+    @from_account.extend(Transferrable)
+    @from_account.transfer(@to_account, @amount)
   end
 end

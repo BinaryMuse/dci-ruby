@@ -1,15 +1,11 @@
 require 'roles/taxable'
-
-class TestTaxable
-  attr_accessor :balance
-  include Taxable
-end
+require 'ostruct'
 
 describe Taxable do
-  let(:taxable) do
-    t = TestTaxable.new
-    t.balance = 100.0
-    t
+  let(:taxable) { OpenStruct.new.extend(Taxable) }
+
+  before :each do
+    taxable.balance = 100.0
   end
 
   it "taxes the balance" do
